@@ -5,7 +5,7 @@ install:
 test:
 	node --test --test-reporter=dot *.js
 coverage:
-	node --test --experimental-test-coverage --test-reporter=lcov --test-reporter-destination=main.info *.js
+	node --test --experimental-test-coverage --test-reporter=lcov --test-reporter-destination=main.lcov *.js
 	lcov --summary main.lcov
 lint:
 	npx prettier . --write
