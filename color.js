@@ -56,13 +56,13 @@ export function CSSColor(...args) {
 }
 
 Define(CSSColor, "RGB", function (val) {
-  let rgbVal = Map((x) => Math.round(x * 100) + "%", val);
+  let rgbVal = MapList((x) => Math.round(x * 100) + "%", val);
 
   // skip alpha - emit 3 values
   if (val[3] == 1.0) {
-    return "rgb(" + StringJoin(Take(rgbVal, 3), " ") + ")";
+    return "rgb(" + StringRiffle(Take(rgbVal, 3)) + ")";
   }
 
   // with alpha
-  return "rgb(" + StringJoin(Take(rgbVal, 3), " ") + " / " + Last(rgbVal) + ")";
+  return "rgb(" + StringRiffle(Take(rgbVal, 3)) + " / " + Last(rgbVal) + ")";
 });

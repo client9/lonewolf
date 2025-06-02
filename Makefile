@@ -10,5 +10,7 @@ coverage:
 lint:
 	npx prettier . --write
 	npx eslint *.js
+clean:
+	rm *.lcov
 
 

@@ -62,6 +62,10 @@ export function Eval(arg) {
   return arg;
 }
 
+export function ListQ(arg) {
+    return Array.isArray(arg)
+}
+
 //----------------------
 function capture(args, idx, pname) {
   for (let i = idx; i < args.length; i++) {
@@ -165,3 +169,12 @@ export function Call(sym, ...args) {
   }
   return f[2](...args);
 }
+
+export function Equal(...args) {
+    if (args.length < 2) {
+        return true
+    }
+    let first = args[0]
+    return args.every(function(x) { return x === first })
+}
+

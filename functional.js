@@ -1,12 +1,16 @@
+import * as _expr from "./expr.js";
+import * as _list from "./list.js";
+
+Object.assign(globalThis, _expr);
+Object.assign(globalThis, _list);
+
+// Fundamental
+//
 export function Apply(fn, list) {
-  if (typeof fn == "string") {
-    list.name = fn;
-    return list;
-  }
   return fn(...list);
 }
 
-export function Map(fn, args) {
+export function MapList(fn, args) {
   return args.map(fn);
 }
 
@@ -21,15 +25,19 @@ function mapindexed_level1(fn, data) {
   }
   return out;
 }
-export function MapIndexed(fn, data, level) {
+export function MapIndexed(fn, data, level=[1]) {
   // fast case.. there is another when level is =[1]
   if (!level || level === 1) {
     return mapindexed_level1(fn, data);
   }
 
-  const out = Array(data.length);
+  const out = new Array(data.length);
   for (let i = 0; i < out.length; i++) {
     out[i] = fn(data[i], i);
   }
   return out;
+}
+
+export function AllTrue(list, fn) {
+    return list.every(fn)
 }

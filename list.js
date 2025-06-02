@@ -17,6 +17,10 @@ export function Last(x) {
   return x.at(-1);
 }
 
+export function Reverse(x) {
+    return x.toReversed()
+}
+
 export function Partition(arr, n) {
   if (n <= 0) {
     return null;
@@ -30,4 +34,21 @@ export function Partition(arr, n) {
 
 export function Range(n) {
   return Array.from(Array(n).keys());
+}
+
+// Optimize
+export function ArrayDepth(a) {
+    return Dimensions(a).length
+}
+
+export function Dimensions(a, n=999, out=[]) {
+    if (n <= 0 || (! Array.isArray(a))) {
+        return out
+    }
+    out.push(a.length)
+    // all entries are arrays with same length
+    if ( Equal(MapList((x) => (ListQ(x) ? x.length : -1), a))) {
+        return Dimensions(a[0], n-1, out)
+    }
+    return out
 }

@@ -3,14 +3,7 @@ import { strict as assert } from "node:assert";
 
 import { StringJoin } from "./string.js";
 
-test("string join, no separator, implied", (t) => {
+test("string join", (t) => {
   assert.strictEqual(StringJoin(["a", "b", "c"]), "abc");
-});
-
-test("string join, no separator, explicit", (t) => {
-  assert.strictEqual(StringJoin(["a", "b", "c"], ""), "abc");
-});
-
-test("string join, separator, explicit", (t) => {
-  assert.strictEqual(StringJoin(["a", "b", "c"], " "), "a b c");
+  assert.strictEqual(StringJoin(["a", ["b"], "c"]), "abc");
 });
