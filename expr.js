@@ -33,6 +33,8 @@ export function Head(x) {
   if (typeof x === "undefined") {
     return "undefined";
   }
+
+    // TBD: object might be better
   if (x === null) {
     return "null";
   }
