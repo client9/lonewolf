@@ -25,7 +25,7 @@ function mapindexed_level1(fn, data) {
   }
   return out;
 }
-export function MapIndexed(fn, data, level=[1]) {
+export function MapIndexed(fn, data, level = [1]) {
   // fast case.. there is another when level is =[1]
   if (!level || level === 1) {
     return mapindexed_level1(fn, data);
@@ -39,5 +39,5 @@ export function MapIndexed(fn, data, level=[1]) {
 }
 
 export function AllTrue(list, fn) {
-    return list.every(fn)
+  return list.every(fn);
 }

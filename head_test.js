@@ -29,21 +29,21 @@ test("head bool", (t) => {
 });
 
 test("head function", (t) => {
-    // named
+  // named
   function foo() {}
-  assert.strictEqual(Head(foo), "Function")
+  assert.strictEqual(Head(foo), "Function");
 
-    // anonymous
-  let x = function() {}
-  assert.strictEqual(Head(x), "Function")
+  // anonymous
+  let x = function () {};
+  assert.strictEqual(Head(x), "Function");
 });
 
 // more a test of how javascript works.
 // "Number" is actually a function
 test("head type", (t) => {
-    assert.strictEqual(Head(Number), "Function")
+  assert.strictEqual(Head(Number), "Function");
 });
 
 test("head expr", (t) => {
-    assert.strictEqual(Head(new Expr(Head, 1)), "Head")
+  assert.strictEqual(Head(new Expr(Head, 1)), "Head");
 });

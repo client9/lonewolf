@@ -5,13 +5,12 @@ Object.assign(globalThis, _expr);
 Object.assign(globalThis, _list);
 Object.assign(globalThis, _func);
 
-
 export function ToString(arg) {
-    if (typeof arg === "string") {
-        return arg
-    }
-    // works for most types.. object TBD
-    return JSON.stringify(arg)
+  if (typeof arg === "string") {
+    return arg;
+  }
+  // works for most types.. object TBD
+  return JSON.stringify(arg);
 }
 
 export function StringPadLeft(str, n, pad = " ") {
@@ -37,32 +36,35 @@ export function StringJoin(...args) {
 
 // TBD missing last arg of max length
 function StringRepeat(str, n) {
-    return str.repeat(n)
+  return str.repeat(n);
 }
 
 function stringRiffleLevel(n, list, seps) {
-    let current, next;
-    let [sepLeft, sepMid, sepRight] = [ "", " ", "" ]
-    if (n < seps.length) {
-        current= seps[n]
-        if (ListQ(current)) {
-            [ sepLeft, sepMid, sepRight ] = current
-        } else {
-            sepMid = current
-        }
-    } 
-    if (AllTrue(list, ListQ)) {
-        return sepLeft + MapList(str => stringRiffleLevel(n+1, str, seps), list).join(sepMid) +  sepRight
+  let current, next;
+  let [sepLeft, sepMid, sepRight] = ["", " ", ""];
+  if (n < seps.length) {
+    current = seps[n];
+    if (ListQ(current)) {
+      [sepLeft, sepMid, sepRight] = current;
+    } else {
+      sepMid = current;
     }
-    return sepLeft + MapList(x => ToString(x), list).join(sepMid) + sepRight
+  }
+  if (AllTrue(list, ListQ)) {
+    return (
+      sepLeft +
+      MapList((str) => stringRiffleLevel(n + 1, str, seps), list).join(sepMid) +
+      sepRight
+    );
+  }
+  return sepLeft + MapList((x) => ToString(x), list).join(sepMid) + sepRight;
 }
 
 export function StringRiffle(list, ...seps) {
-    if (seps.length == 0) {
-        seps = MapList( x => StringRepeat("\n", x), Range(ArrayDepth(list)))
-        seps[0] = " "
-        seps = Reverse(seps)
-    }
-    return stringRiffleLevel(0, list, seps)
+  if (seps.length == 0) {
+    seps = MapList((x) => StringRepeat("\n", x), Range(ArrayDepth(list)));
+    seps[0] = " ";
+    seps = Reverse(seps);
+  }
+  return stringRiffleLevel(0, list, seps);
 }
-

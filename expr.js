@@ -34,7 +34,7 @@ export function Head(x) {
     return "undefined";
   }
 
-    // TBD: object might be better
+  // TBD: object might be better
   if (x === null) {
     return "null";
   }
@@ -63,7 +63,7 @@ export function Eval(arg) {
 }
 
 export function ListQ(arg) {
-    return Array.isArray(arg)
+  return Array.isArray(arg);
 }
 
 //----------------------
@@ -171,10 +171,11 @@ export function Call(sym, ...args) {
 }
 
 export function Equal(...args) {
-    if (args.length < 2) {
-        return true
-    }
-    let first = args[0]
-    return args.every(function(x) { return x === first })
+  if (args.length < 2) {
+    return true;
+  }
+  let first = args[0];
+  return args.every(function (x) {
+    return x === first;
+  });
 }
-
