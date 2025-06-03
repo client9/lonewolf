@@ -41,3 +41,12 @@ export function MapIndexed(fn, data, level = [1]) {
 export function AllTrue(list, fn) {
   return list.every(fn);
 }
+export function AnyTrue(list, fn) {
+  return list.some(fn)
+  //return list.findIndex(fn) !== -1;
+}
+export function NoneTrue(list, fn) {
+  return list.findIndex(fn) === -1;
+  // slow way
+  // return (list.every(x => !fn(x)))
+}
