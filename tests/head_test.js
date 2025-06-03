@@ -5,8 +5,8 @@ import { Expr, Head } from "../lonewolf.js";
 test("Head", (t) => {
   assert.strictEqual(Head(), "undefined");
 
-// unclear what the right behavior is
-// Object might be better
+  // unclear what the right behavior is
+  // Object might be better
   assert.strictEqual(Head(null), "null");
 
   assert.strictEqual(Head(1), "Number");
@@ -29,8 +29,8 @@ test("Head", (t) => {
   let x = function () {};
   assert.strictEqual(Head(x), "Function");
 
-// more a test of how javascript works.
-// "Number" is actually a function
+  // more a test of how javascript works.
+  // "Number" is actually a function
   assert.strictEqual(Head(Number), "Function");
 
   assert.strictEqual(Head(new Expr(Head, 1)), "Head");
