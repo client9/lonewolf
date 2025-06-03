@@ -1,14 +1,5 @@
-import * as _expr from "./expr.js";
-import * as _func from "./functional.js";
-import * as _str from "./string.js";
-import * as _list from "./list.js";
-Object.assign(globalThis, _expr);
-Object.assign(globalThis, _func);
-Object.assign(globalThis, _list);
-Object.assign(globalThis, _str);
-
-export function RGB(...args) {
-  return Call(RGB, ...Eval(args));
+export function RGBColor(...args) {
+  return Call(RGBColor, ...Eval(args));
 }
 
 function clamp01(x) {
@@ -21,14 +12,14 @@ function clamp01(x) {
   return x;
 }
 
-Define(RGB, "Number Number Number", function (a, b, c) {
-  return new Expr(RGB, clamp01(a), clamp01(b), clamp01(c), 1.0);
+Define(RGBColor, "Number Number Number", function (a, b, c) {
+  return new Expr(RGBColor, clamp01(a), clamp01(b), clamp01(c), 1.0);
 });
 
-Define(RGB, "Number Number Number Number", function (a, b, c, d) {
-  return new Expr(RGB, clamp01(a), clamp01(b), clamp01(c), clamp01(d));
+Define(RGBColor, "Number Number Number Number", function (a, b, c, d) {
+  return new Expr(RGBColor, clamp01(a), clamp01(b), clamp01(c), clamp01(d));
 });
-Define(RGB, "String", function (hexstr) {
+Define(RGBColor, "String", function (hexstr) {
   let parts = [];
   if (hexstr.length == 3) {
     parts = hexstr.split("");
@@ -48,14 +39,14 @@ Define(RGB, "String", function (hexstr) {
   if (parts.length == 3) {
     parts.push(1.0);
   }
-  return new Expr(RGB, ...parts);
+  return new Expr(RGBColor, ...parts);
 });
 
 export function CSSColor(...args) {
   return Call(CSSColor, ...Eval(args));
 }
 
-Define(CSSColor, "RGB", function (val) {
+Define(CSSColor, "RGBColor", function (val) {
   let rgbVal = MapList((x) => Math.round(x * 100) + "%", val);
 
   // skip alpha - emit 3 values

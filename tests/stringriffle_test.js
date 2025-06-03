@@ -1,6 +1,6 @@
 import test from "node:test";
 import { strict as assert } from "node:assert";
-import { StringRiffle } from "./string.js";
+import { StringRiffle } from "../lonewolf.js";
 
 test("StringRiffle", (t) => {
   assert.strictEqual(StringRiffle(["1", "2", "3"]), "1 2 3");

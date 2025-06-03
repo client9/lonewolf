@@ -1,7 +1,7 @@
 import test from "node:test";
 import { strict as assert } from "node:assert";
 
-import { Table } from "./list.js";
+import { Table } from "../lonewolf.js";
 
 test("Table", (t) => {
   assert.deepEqual(Table(1, 3), [1, 1, 1]);

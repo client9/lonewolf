@@ -1,6 +1,3 @@
-import * as _expr from "./expr.js";
-Object.assign(globalThis, _expr);
-
 export function First(x) {
   return x.at(0);
 }

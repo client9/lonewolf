@@ -1,10 +1,3 @@
-import * as _expr from "./expr.js";
-import * as _list from "./list.js";
-import * as _func from "./functional.js";
-Object.assign(globalThis, _expr);
-Object.assign(globalThis, _list);
-Object.assign(globalThis, _func);
-
 export function ToString(arg) {
   if (typeof arg === "string") {
     return arg;

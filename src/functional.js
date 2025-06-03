@@ -1,9 +1,3 @@
-import * as _expr from "./expr.js";
-import * as _list from "./list.js";
-
-Object.assign(globalThis, _expr);
-Object.assign(globalThis, _list);
-
 // Fundamental
 //
 export function Apply(fn, list) {

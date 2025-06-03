@@ -1,6 +1,3 @@
-import * as _expr from "./expr.js";
-Object.assign(globalThis, _expr);
-
 export function HTMLEscape(str) {
   return str
     .toString()
@@ -38,4 +35,11 @@ export function HTMLTag(name, attrs = {}, ...body) {
     name,
     ">",
   );
+}
+
+export function HTMLNode(name, attrs = {}, children = []) {
+  return new Expr(HTMLNode, name, attrs, children);
+}
+export function HTMLTextNode(body) {
+  return new Expr(HTMLTextNode, body);
 }
