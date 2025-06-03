@@ -1,3 +1,10 @@
+import { Expr, Eval, Call, Define } from "./expr.js";
+import Take from "./Take.js";
+import MapList from "./MapList.js";
+import StringRiffle from "./StringRiffle.js";
+//import Range from "./Range.js";
+import Last from "./Last.js";
+
 export function RGBColor(...args) {
   return Call(RGBColor, ...Eval(args));
 }

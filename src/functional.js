@@ -4,10 +4,6 @@ export function Apply(fn, list) {
   return fn(...list);
 }
 
-export function MapList(fn, args) {
-  return args.map(fn);
-}
-
 export function MapThread(fn, ...lists) {
   return Map((x) => Apply(fn, x), Transpose(lists));
 }
@@ -32,9 +28,6 @@ export function MapIndexed(fn, data, level = [1]) {
   return out;
 }
 
-export function AllTrue(list, fn) {
-  return list.every(fn);
-}
 export function AnyTrue(list, fn) {
   return list.some(fn);
   //return list.findIndex(fn) !== -1;

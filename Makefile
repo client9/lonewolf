@@ -1,7 +1,6 @@
 
 lonewolf.js: src/*.js
-	mkdir -p build
-	cat src/expr.js src/list.js src/functional.js src/string.js src/html.js src/color.js > lonewolf.js
+	rollup src/index.js --file lonewolf.js --format es
 
 test: lonewolf.js
 	node --test --test-reporter=dot tests/*.js
@@ -14,12 +13,13 @@ coverage:
 	lcov --summary main.lcov
 
 lint:
-	npx prettier src/*.js --write
+	npx prettier src/*.js tests/*.js --write
 	npx eslint src/*.js
 
 clean:
 	rm *.lcov
-
+	rm -f lonewolf.js
+	rm -rf dist
 
 install:
 	npm install --save-dev eslint@latest @eslint/js@latest

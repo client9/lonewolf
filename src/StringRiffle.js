@@ -1,36 +1,11 @@
-export function ToString(arg) {
-  if (typeof arg === "string") {
-    return arg;
-  }
-  // works for most types.. object TBD
-  return JSON.stringify(arg);
-}
-
-export function StringPadLeft(str, n, pad = " ") {
-  // easy optimization here
-  // str.length  + x * padding.length = n
-  // x* pad.len = n - str.len
-  const x = Math.ceil((n - str.length) / pad.length);
-  if (x > 0) {
-    str = new Array(x).fill(pad).join("") + str;
-  }
-  if (str.length > n) {
-    return str.slice(0, n);
-  }
-  return str;
-}
-
-//  In other languages string join joins strings with a separator
-//  That's handled by StringRiffle
-//  This flattens and joins directly.
-export function StringJoin(...args) {
-  return args.flat(999).join("");
-}
-
-// TBD missing last arg of max length
-function StringRepeat(str, n) {
-  return str.repeat(n);
-}
+import AllTrue from "./AllTrue.js";
+import ListQ from "./ListQ.js";
+import MapList from "./MapList.js";
+import Range from "./Range.js";
+import ArrayDepth from "./ArrayDepth.js";
+import StringRepeat from "./StringRepeat.js";
+import Reverse from "./Reverse.js";
+import ToString from "./ToString.js";
 
 function stringRiffleLevel(n, list, seps) {
   let current;
@@ -58,7 +33,7 @@ function stringRiffleLevel(n, list, seps) {
   return sepLeft + MapList((x) => ToString(x), list).join(sepMid) + sepRight;
 }
 
-export function StringRiffle(list, ...seps) {
+export default function StringRiffle(list, ...seps) {
   if (seps.length == 0) {
     // this next list can be optimized
     seps = MapList((x) => StringRepeat("\n", x), Range(ArrayDepth(list)));

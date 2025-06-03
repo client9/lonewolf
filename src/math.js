@@ -1,5 +1,4 @@
-import * as _expr from "./expr.js";
-Object.assign(globalThis, _expr);
+import "./expr.js";
 
 function Plus(...args) {
   return Call(Plus, ...Eval(args));

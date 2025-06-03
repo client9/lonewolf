@@ -1,3 +1,5 @@
+import StringJoin from "./StringJoin.js";
+
 export function HTMLEscape(str) {
   return str
     .toString()

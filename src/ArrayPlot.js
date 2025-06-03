@@ -1,9 +1,9 @@
-import * as _expr from "./expr.js";
-import { MapList } from "./functional.js";
-import { StringJoin, StringPadLeft } from "./string.js";
-import { CSSColor } from "./color.js";
-import { Table } from "./list.js";
+import MapList from "./MapList.js";
+import StringPadLeft from "./StringPadLeft.js";
+//import Table from "./Table.js";
+import StringJoin from "./StringJoin.js";
 import { HTMLTag } from "./html.js";
+import { CSSColor } from "./color.js";
 
 export function Legend(n, colorfn) {
   const nbsp = String.fromCodePoint(0xa0);
