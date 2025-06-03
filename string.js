@@ -40,11 +40,11 @@ function StringRepeat(str, n) {
 }
 
 function stringRiffleLevel(n, list, seps) {
-  let current, next;
+  let current;
   let [sepLeft, sepMid, sepRight] = ["", " ", ""];
-    // maybe
-    // if n == seps.length { return toString(list) }
-    // we ran out of separators
+  // maybe
+  // if n == seps.length { return toString(list) }
+  // we ran out of separators
 
   if (n < seps.length) {
     current = seps[n];
@@ -54,7 +54,7 @@ function stringRiffleLevel(n, list, seps) {
       sepMid = current;
     }
   }
-    // is list of list AND we n+1 < seps.length
+  // is list of list AND we n+1 < seps.length
   if (AllTrue(list, ListQ)) {
     return (
       sepLeft +

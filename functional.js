@@ -42,7 +42,7 @@ export function AllTrue(list, fn) {
   return list.every(fn);
 }
 export function AnyTrue(list, fn) {
-  return list.some(fn)
+  return list.some(fn);
   //return list.findIndex(fn) !== -1;
 }
 export function NoneTrue(list, fn) {
