@@ -1,22 +1,13 @@
-import { Expr, Eval, Call, Define } from "./expr.js";
-import Take from "./Take.js";
-import MapList from "./MapList.js";
-import StringRiffle from "./StringRiffle.js";
-//import Range from "./Range.js";
-import Last from "./Last.js";
+import { Eval, Call, Define } from "./dispatch.js";
+import Expr from "./Expr.js";
+import Clamp from "./Clamp.js";
 
-export function RGBColor(...args) {
+export default function RGBColor(...args) {
   return Call(RGBColor, ...Eval(args));
 }
 
 function clamp01(x) {
-  if (x < 0) {
-    return 0;
-  }
-  if (x > 1) {
-    return 1;
-  }
-  return x;
+    return Clamp(x, 0, 1);
 }
 
 Define(RGBColor, "Number Number Number", function (a, b, c) {
@@ -47,20 +38,4 @@ Define(RGBColor, "String", function (hexstr) {
     parts.push(1.0);
   }
   return new Expr(RGBColor, ...parts);
-});
-
-export function CSSColor(...args) {
-  return Call(CSSColor, ...Eval(args));
-}
-
-Define(CSSColor, "RGBColor", function (val) {
-  let rgbVal = MapList((x) => Math.round(x * 100) + "%", val);
-
-  // skip alpha - emit 3 values
-  if (val[3] == 1.0) {
-    return "rgb(" + StringRiffle(Take(rgbVal, 3)) + ")";
-  }
-
-  // with alpha
-  return "rgb(" + StringRiffle(Take(rgbVal, 3)) + " / " + Last(rgbVal) + ")";
 });

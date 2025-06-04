@@ -1,48 +1,5 @@
-export class Expr extends Array {
-  constructor(name, ...args) {
-    super(...args);
-
-    // this additional property does not show up
-    // on normal array iteration, or change the length
-    // for example:
-    //     Expr(foo, 1,2,3)
-    // has length 3, and works the same as [1,2,3]
-    this.head = name;
-  }
-
-  // Output should  x == eval(x.toString())
-  toString() {
-    if (this.length == 0) {
-      return "";
-    }
-    return (
-      this.head.name + "(" + this.map((x) => x.toString()).join(", ") + ")"
-    );
-  }
-}
-
-/**
- * Returns the "head" of an input.
- * It's an Expr-aware super "typeof" function.
- * Always returns a string, never fails.
- *
- * @param {*}
- * @returns {string}
- */
-export function Head(x) {
-  if (typeof x === "undefined") {
-    return "undefined";
-  }
-
-  // TBD: object might be better
-  if (x === null) {
-    return "null";
-  }
-  if (x instanceof Expr) {
-    return x.head.name || x.head.constructor.name;
-  }
-  return x.constructor.name;
-}
+import Head from "./Head.js";
+import Expr from "./Expr.js";
 
 /**
  * For basic JS types, this will do nothing, and just return the input
