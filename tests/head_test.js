@@ -14,6 +14,11 @@ test("Head", (t) => {
   // NaN
   assert.strictEqual(Head(1 / 0), "Number");
 
+  // Strings
+
+  assert.strictEqual(Head("foo"), "String");
+  assert.strictEqual(Head(String("foo")), "String");
+
   assert.strictEqual(Head([]), "Array");
 
   assert.strictEqual(Head({}), "Object");
@@ -23,15 +28,15 @@ test("Head", (t) => {
 
   // named
   function foo() {}
-  assert.strictEqual(Head(foo), "Function");
+  assert.strictEqual(Head(foo), "foo");
 
   // anonymous
   let x = function () {};
-  assert.strictEqual(Head(x), "Function");
+  assert.strictEqual(Head(x), "x");
 
-  // more a test of how javascript works.
   // "Number" is actually a function
-  assert.strictEqual(Head(Number), "Function");
+  assert.strictEqual(Head(Number), "Number");
+  assert.strictEqual(Head(String), "String");
 
   assert.strictEqual(Head(new Expr(Head, 1)), "Head");
 });

@@ -1,4 +1,4 @@
-export function StringPadLeft(str, n, pad = " ") {
+export default function StringPadLeft(str, n, pad = " ") {
   // easy optimization here
   // str.length  + x * padding.length = n
   // x* pad.len = n - str.len

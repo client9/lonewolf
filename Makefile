@@ -2,6 +2,9 @@
 lonewolf.js: src/*.js
 	rollup src/index.js --file lonewolf.js --format es
 
+start: lonewolf.js
+	python3 -m http.server
+
 test: lonewolf.js
 	node --test --test-reporter=dot tests/*.js
 
@@ -17,10 +20,11 @@ lint:
 	npx eslint src/*.js
 
 clean:
-	rm *.lcov
+	rm -f *.lcov
 	rm -f lonewolf.js
 	rm -rf dist
 
 install:
+	npm install --global rollup
 	npm install --save-dev eslint@latest @eslint/js@latest
-	npm install --save-dev --save-exact prettier
+	npm install --save-dev --save-exact --save-exact prettier

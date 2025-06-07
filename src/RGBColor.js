@@ -1,23 +1,24 @@
 import { Eval, Call, Define } from "./dispatch.js";
 import Expr from "./Expr.js";
 import Clamp from "./Clamp.js";
+import { Repeated, MatchHead } from "./pattern.js";
 
 export default function RGBColor(...args) {
   return Call(RGBColor, ...Eval(args));
 }
 
 function clamp01(x) {
-    return Clamp(x, 0, 1);
+  return Clamp(x, 0, 1);
 }
 
-Define(RGBColor, "Number Number Number", function (a, b, c) {
+Define(RGBColor, Repeated(MatchHead(Number), [3]), function (a, b, c) {
   return new Expr(RGBColor, clamp01(a), clamp01(b), clamp01(c), 1.0);
 });
 
-Define(RGBColor, "Number Number Number Number", function (a, b, c, d) {
+Define(RGBColor, Repeated(MatchHead(Number), [4]), function (a, b, c, d) {
   return new Expr(RGBColor, clamp01(a), clamp01(b), clamp01(c), clamp01(d));
 });
-Define(RGBColor, "String", function (hexstr) {
+Define(RGBColor, MatchHead(String), function (hexstr) {
   let parts = [];
   if (hexstr.length == 3) {
     parts = hexstr.split("");

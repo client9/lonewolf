@@ -1,4 +1,3 @@
-
 export default function HTMLUnescape(str) {
   return str
     .replaceAll("&amp;", "&")

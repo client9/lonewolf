@@ -20,5 +20,10 @@ export default function Head(x) {
   if (x instanceof Expr) {
     return x.head.name || x.head.constructor.name;
   }
+
+  if (x instanceof Function) {
+    return x.name;
+  }
+
   return x.constructor.name;
 }

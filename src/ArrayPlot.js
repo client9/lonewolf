@@ -2,8 +2,10 @@ import MapList from "./MapList.js";
 import StringPadLeft from "./StringPadLeft.js";
 //import Table from "./Table.js";
 import StringJoin from "./StringJoin.js";
-import { HTMLTag } from "./html.js";
-import { CSSColor } from "./color.js";
+import HTMLTag from "./HTMLTag.js";
+import CSSColor from "./CSSColor.js";
+import Grayscale from "./Grayscale.js";
+import ToString from "./ToString.js";
 
 export function Legend(n, colorfn) {
   const nbsp = String.fromCodePoint(0xa0);
@@ -36,11 +38,13 @@ export function Legend(n, colorfn) {
     "</table>\n",
   );
 }
-export function ArrayPlot(m, ...options) {
+
+export default function ArrayPlot(m, options) {
   const defaultOptions = {
     colorFunctionScaling: true,
-    colorFunction: VisibleSpectrum,
+    colorFunction: Grayscale
   };
+	
   const opts = { ...defaultOptions, ...options };
 
   return StringJoin(

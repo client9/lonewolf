@@ -1,4 +1,3 @@
-
 export default function HTMLEscape(str) {
   return str
     .toString()
@@ -8,4 +7,3 @@ export default function HTMLEscape(str) {
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#39;");
 }
-

@@ -1,6 +1,30 @@
-export default function Table(fn, spec) {
+import Most from "./Most.js";
+import Last from "./Last.js";
+import Rest from "./Rest.js";
+import First from "./First.js";
+
+export default function Table(fn, ...specs) {
+  /*
+  if (specs.length > 1) {
+	return Table(() => Table(fn, ...Most(specs)), Last(specs))
+  }
+*/
+  let spec = First(specs);
+  let rest = Rest(specs);
   if (Number.isSafeInteger(spec)) {
-    return new Array(spec).fill(fn);
+    let ary = new Array(spec);
+    if (typeof fn == "function") {
+      for (let i = 0; i < spec; i++) {
+        if (rest.length == 0) {
+          ary[i] = fn();
+        } else {
+          ary[i] = Table(fn, ...rest);
+        }
+      }
+    } else {
+      ary.fill(fn);
+    }
+    return ary;
   }
   let imin, imax, inc;
   if (Array.isArray(spec)) {
@@ -13,6 +37,8 @@ export default function Table(fn, spec) {
     } else {
       throw new Error("Unknown Table spec of " + spec);
     }
+  } else {
+    throw new Error("Unknown Table spec of " + spec);
   }
   let ary = new Array(Math.floor((imax - imin) / inc));
   //console.log(">>>>", typeof fn)
@@ -20,10 +46,27 @@ export default function Table(fn, spec) {
   if (typeof fn == "function") {
     // || (fn instanceof Function)) {
     for (let i = imin, j = 0; i < imax; i += inc, j++) {
-      ary[j] = fn(i);
+      if (specs.length == 1) {
+        ary[j] = fn(i);
+      } else {
+        let fnext = function (...args) {
+          return fn(i, ...args);
+        };
+        ary[j] = Table(fnext, ...rest);
+      }
     }
   } else {
     ary.fill(fn);
   }
   return ary;
 }
+
+/*
+> f = function(x,y) { return [x,y] }
+[Function: f]
+> fnext = function(...args) { return f(1, ...args) }
+[Function: fnext]
+> fnext(2)
+[ 1, 2 ]
+> 
+*/
