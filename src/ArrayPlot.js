@@ -48,30 +48,27 @@ export default function ArrayPlot(m, options) {
   const opts = { ...defaultOptions, ...options };
 
   return StringJoin(
-    "<table class='ldp'>",
-    "<thead></thead>\n",
-    "<tbody>",
+    "<div class='ap-container'>",
     MapList(
       (row) => [
-        "<tr>",
+        "<div class='ap-row'>",
         MapList(
           (cell) =>
             HTMLTag(
-              "td",
+              "div",
               {
-                class: "cell",
+                class: "ap-cell",
                 style: "background:" + CSSColor(opts.colorFunction(cell)),
               },
-              "&nbsp;",
+              "",
             ),
           row,
         ),
-        "</tr>",
+        "</div>",
       ],
       m,
     ),
-    "</tbody>",
-    "</table>",
+    "</div>",
   );
 }
 
