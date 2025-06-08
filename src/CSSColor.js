@@ -26,7 +26,7 @@ Define(CSSColor, MatchHead(RGBColor), function (val) {
 });
 
 Define(CSSColor, MatchHead(Grayscale), function (val) {
-  let out = "hsl(0 0 " + Math.round(100*val[0]).toString() + ")";
+  let out = "hsl(0 0 " + Math.round(100 * val[0]).toString() + ")";
   return out;
 });
 

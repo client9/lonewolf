@@ -28,8 +28,15 @@ export function Define(sym, pattern, fn) {
   if (!patterns) {
     patterns = [];
   }
-  patterns.push([pattern, pattern, fn]);
-  registry.set(sym, patterns);
+  if (pattern) {
+    patterns.push([pattern, pattern, fn]);
+    registry.set(
+      sym,
+      patterns.sort((a, b) => b[1].rank - a[1].rank),
+    );
+  } else {
+    return patterns.map((x) => x[1]);
+  }
 }
 
 export function Call(sym, ...args) {

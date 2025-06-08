@@ -7,10 +7,6 @@ export default function Grayscale(...args) {
   return Call(Grayscale, ...Eval(args));
 }
 
-function clamp01(x) {
-  return Clamp(x, 0, 1);
-}
-
 Define(Grayscale, MatchType(1), function (a) {
-  return new Expr(Grayscale, a);
+  return new Expr(Grayscale, Clamp(a, 0, 1));
 });

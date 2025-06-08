@@ -11,17 +11,32 @@ export function MatchOnePredicate(fn) {
 
 export function MatchType(val) {
   const tval = typeof val;
-  return MatchOnePredicate((x) => typeof x === tval);
+  let f = MatchOnePredicate((x) => typeof x === tval);
+  f.rank = 1;
+  f.toString = function () {
+    return val;
+  };
+  return f;
 }
 
 export function MatchHead(val) {
   let head = Head(val);
   //return MatchOnePredicate((x) => ((typeof head) === (typeof val)));
-  return MatchOnePredicate((x) => head == Head(x));
+  let f = MatchOnePredicate((x) => head == Head(x));
+  f.rank = 1;
+  f.toString = function () {
+    return head;
+  };
+  return f;
 }
 
 export function MatchValue(val) {
-  return MatchOnePredicate((x) => x === val);
+  let f = MatchOnePredicate((x) => x === val);
+  f.rank = 1;
+  f.toString = function () {
+    return val;
+  };
+  return f;
 }
 
 // TBD... what if i != 0
@@ -31,7 +46,10 @@ export function MatchNone(args, i) {
   }
   return -1;
 }
-
+MatchNone.rank = 10;
+MatchNone.toString = function () {
+  return "none";
+};
 export function MatchOne(val) {
   let f = function (args, i) {
     if (args[i] == val) {
@@ -43,12 +61,23 @@ export function MatchOne(val) {
   f.toString = function () {
     return desc;
   };
+  f.rank = 1;
   return f;
 }
+
+export function MatchAny(args, i) {
+  // to go end... this isn't quite right
+  return args.length;
+}
+MatchAny.rank = 0;
+MatchAny.toString = function () {
+  return "**";
+};
 
 export function MatchOneAny(args, i) {
   return i + 1;
 }
+MatchOneAny.rank = 0;
 
 MatchOneAny.toString = function () {
   return "*";
@@ -74,6 +103,12 @@ export function MatchAnd(...matchers) {
     }
     return j;
   };
+
+  let rank = 0;
+  for (let m of matchers) {
+    rank += m.rank;
+  }
+  f.rank = rank;
   let desc = matchers.map((x) => x.toString()).join(",");
 
   f.toString = function () {
@@ -104,7 +139,7 @@ export function Repeated(m, n) {
     throw new Error("invalid inputs to Repeated");
   }
 
-  return function (args, j) {
+  let f = function (args, j) {
     let jnext = j;
     let jcur = j;
     let count = 0;
@@ -121,6 +156,9 @@ export function Repeated(m, n) {
     }
     return -1;
   };
+  let rank = Math.min(5, pmax - pmin) * m.rank;
+  f.rank = rank;
+  return f;
 }
 
 export function MatchOr(matchers) {
@@ -142,6 +180,8 @@ export function MatchOr(matchers) {
     // can't happen?
     return -1;
   };
+  let rank = Math.min(...matchers.map((x) => x.rank));
+  f.rank = rank;
   let desc = matchers.map((x) => x.toString()).join("|");
   f.toString = function () {
     return desc;
@@ -150,20 +190,4 @@ export function MatchOr(matchers) {
 }
 export function Pattern(m, args) {
   return m(args, 0) == args.length;
-}
-
-function P1ttern(matchers, args) {
-  let i = 0;
-  let j = 0;
-  while (i < matchers.length && j < args.length) {
-    let idx = matchers[i](args, j);
-    if (idx == -1) {
-      break;
-    }
-    if (idx > j) {
-      j = idx;
-      i++;
-    }
-  }
-  return i == matchers.length && j == args.length;
 }

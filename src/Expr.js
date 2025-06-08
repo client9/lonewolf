@@ -1,11 +1,11 @@
 export default class Expr extends Array {
   constructor(name, ...args) {
-	if (args.length == 1) {
-		super(1)
-		this[0] = args[0]	
-	} else {
-    		super(...args);
-	}
+    if (args.length == 1) {
+      super(1);
+      this[0] = args[0];
+    } else {
+      super(...args);
+    }
     // this additional property does not show up
     // on normal array iteration, or change the length
     // for example:

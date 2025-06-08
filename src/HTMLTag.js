@@ -13,7 +13,8 @@ export default function HTMLTag(name, attrs = {}, ...body) {
     "<",
     name,
     MapList(
-      ([k, v]) => " " + k + '="' + HTMLEscape(v) + '"', Object.entries(attrs)
+      ([k, v]) => " " + k + '="' + HTMLEscape(v) + '"',
+      Object.entries(attrs),
     ),
     ">",
     body,

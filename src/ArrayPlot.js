@@ -42,9 +42,9 @@ export function Legend(n, colorfn) {
 export default function ArrayPlot(m, options) {
   const defaultOptions = {
     colorFunctionScaling: true,
-    colorFunction: Grayscale
+    colorFunction: Grayscale,
   };
-	
+
   const opts = { ...defaultOptions, ...options };
 
   return StringJoin(
