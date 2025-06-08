@@ -14,6 +14,9 @@ test("Head", (t) => {
   // NaN
   assert.strictEqual(Head(1 / 0), "Number");
 
+  // Symbol
+  assert.strictEqual(Head(Symbol.for("x")), "Symbol");
+
   // Strings
 
   assert.strictEqual(Head("foo"), "String");
