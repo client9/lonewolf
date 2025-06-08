@@ -1,5 +1,3 @@
-function AllTrue(list, fn) {
+export default function AllTrue(list, fn) {
   return list.every(fn);
 }
-
-export default AllTrue;
