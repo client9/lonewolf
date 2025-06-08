@@ -1,6 +1,6 @@
 import Head from "./Head.js";
 
-export function MatchOnePredicate(fn) {
+export function MatchOne(fn) {
   return function (args, i) {
     if (fn(args[i])) {
       return i + 1;
@@ -11,7 +11,7 @@ export function MatchOnePredicate(fn) {
 
 export function MatchType(val) {
   const tval = typeof val;
-  let f = MatchOnePredicate((x) => typeof x === tval);
+  let f = MatchOne((x) => typeof x === tval);
   f.rank = 1;
   f.toString = function () {
     return val;
@@ -19,10 +19,29 @@ export function MatchType(val) {
   return f;
 }
 
+export function MatchExpr(val, ...exprs) {
+  let head = Head(val);
+  let f = function (args, i) {
+    if (head != Head(val)) {
+      return -1;
+    }
+    if (!Pattern(MatchAnd(...exprs), args[i])) {
+      console.log(">>>", exprs.length, exprs[0].toString());
+      console.log(">>> arg len", args[i].length);
+      console.log(">>> args val", args[i].toString());
+      return -1;
+    }
+    return i + 1;
+  };
+  f.rank = 2;
+  f.toString = function () {
+    return head + args.map((x) => x.toString).join(" ");
+  };
+  return f;
+}
 export function MatchHead(val) {
   let head = Head(val);
-  //return MatchOnePredicate((x) => ((typeof head) === (typeof val)));
-  let f = MatchOnePredicate((x) => head == Head(x));
+  let f = MatchOne((x) => head == Head(x));
   f.rank = 1;
   f.toString = function () {
     return head;
@@ -31,7 +50,7 @@ export function MatchHead(val) {
 }
 
 export function MatchValue(val) {
-  let f = MatchOnePredicate((x) => x === val);
+  let f = MatchOne((x) => x === val);
   f.rank = 1;
   f.toString = function () {
     return val;
@@ -50,7 +69,8 @@ MatchNone.rank = 10;
 MatchNone.toString = function () {
   return "none";
 };
-export function MatchOne(val) {
+
+export function MatchEqual(val) {
   let f = function (args, i) {
     if (args[i] == val) {
       return i + 1;
@@ -85,6 +105,14 @@ MatchOneAny.toString = function () {
 
 export function MatchAnd(...matchers) {
   let f = function (args, j) {
+    /* special case if MatchNone is first */
+    if (
+      matchers.length === 1 &&
+      matchers[0] == MatchNone &&
+      args.length === 0
+    ) {
+      return 0;
+    }
     let i = 0;
     while (i < matchers.length) {
       if (j == args.length) {
