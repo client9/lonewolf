@@ -16,9 +16,6 @@ export default class Expr extends Array {
 
   // Output should  x == eval(x.toString())
   toString() {
-    if (this.length == 0) {
-      return "";
-    }
     return (
       this.head.name + "(" + this.map((x) => x.toString()).join(", ") + ")"
     );
