@@ -7,9 +7,9 @@ export default function Times(...args) {
 
 // standard addition of numbers
 Define(Times, Repeated(MatchType(1)), function (...args) {
-  return args.reduce((x, y) => x * y, 0);
+  return args.reduce((x, y) => x * y, 1);
 });
 // standard addition of numbers
 Define(Times, MatchType([]), function (list) {
-  return list.reduce((x, y) => x * y, 0);
+  return list.reduce((x, y) => x * y, 1);
 });
