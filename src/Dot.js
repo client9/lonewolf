@@ -1,6 +1,6 @@
 // Dot product for matrix and vectors
 import { Eval, Call, Define } from "./dispatch.js";
-import { MatchOne, MatchAnd } from "./pattern.js";
+import { MatchOne } from "./pattern.js";
 import VectorQ from "./VectorQ.js";
 import MatrixQ from "./MatrixQ.js";
 import MapThread from "./MapThread.js";
@@ -29,7 +29,7 @@ const dotmatvec = function (a, b) {
   return out;
 };
 
-Define(Dot, MatchAnd(MatchOne(VectorQ), MatchOne(VectorQ)), function (a, b) {
+Define(Dot, [MatchOne(VectorQ), MatchOne(VectorQ)], function (a, b) {
   if (a.length != b.length) {
     throw new Error("dot product requires vector have same length");
   }
@@ -37,14 +37,14 @@ Define(Dot, MatchAnd(MatchOne(VectorQ), MatchOne(VectorQ)), function (a, b) {
   //return Apply(Plus, MapThread(Times, [a, b]))
 });
 
-Define(Dot, MatchAnd(MatchOne(MatrixQ), MatchOne(VectorQ)), function (a, b) {
+Define(Dot, [MatchOne(MatrixQ), MatchOne(VectorQ)], function (a, b) {
   if (a[0].length != b.length) {
     throw new Error("wrong shape");
   }
   return dotmatvec(a, b);
 });
 
-Define(Dot, MatchAnd(MatchOne(MatrixQ), MatchOne(MatrixQ)), function (a, b) {
+Define(Dot, [MatchOne(MatrixQ), MatchOne(MatrixQ)], function (a, b) {
   let n = Transpose(b);
   if (a.length != n.length) {
     throw new Error("matrix wrong shape");

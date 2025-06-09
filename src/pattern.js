@@ -217,5 +217,10 @@ export function MatchOr(matchers) {
   return f;
 }
 export function Pattern(m, args) {
+  // no matchers, and no args --> match
+  // this solves the MatchAnd problem
+  if (args.length == 0 && m.length == 0) {
+    return true;
+  }
   return m(args, 0) == args.length;
 }

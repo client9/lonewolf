@@ -1,6 +1,6 @@
 import Head from "./Head.js";
 import Expr from "./Expr.js";
-import { Pattern } from "./pattern.js";
+import { Repeated, MatchNone, MatchAnd, Pattern } from "./pattern.js";
 /**
  * For basic JS types, this will do nothing, and just return the input
  * For arrays, it will create a new array Eval-ing each element
@@ -30,13 +30,27 @@ class registry extends Map {
       patterns = [];
     }
     if (pattern) {
-      patterns.push([pattern, pattern, fn]);
+      let p = pattern;
+      if (Array.isArray(p)) {
+        if (pattern.length === 0) {
+          // if pattern is empty list [], switch to
+          // Matcher so we can display, have rank, sort
+          p = MatchNone;
+        } else if (pattern.length == 1) {
+          // just pull out only condition
+          p = pattern[0];
+        } else if (pattern.length > 1) {
+          // wrap them
+          p = MatchAnd(...pattern);
+        }
+      }
+      patterns.push([p, fn]);
       this.set(
         sym,
-        patterns.sort((a, b) => b[1].rank - a[1].rank),
+        patterns.sort((a, b) => b[0].rank - a[0].rank),
       );
     } else {
-      return patterns.map((x) => x[1]);
+      return patterns.map((x) => x[0]);
     }
   }
 
@@ -46,7 +60,7 @@ class registry extends Map {
       throw new Error(sym.name + ":  no definitions found");
       //return new Expr(sym, ...args)
     }
-    let f = patterns.find((x) => Pattern(x[1], args));
+    let f = patterns.find((x) => Pattern(x[0], args));
     if (!f) {
       // this is the calling signature
       const sig = args.map((x) => Head(x)).join(" ");
@@ -55,7 +69,7 @@ class registry extends Map {
       );
       //return new Expr(sym, ...args)
     }
-    return f[2](...args);
+    return f[1](...args);
   }
 }
 

@@ -22,25 +22,29 @@ import AnyTrue from "./AnyTrue.js";
 import BitXor from "./BitXor.js";
 import BitAnd from "./BitAnd.js";
 import BitOr from "./BitOr.js";
+import CSSColor from "./CSSColor.js";
 import Circle from "./Circle.js";
 import Dimensions from "./Dimensions.js";
 import Do from "./Do.js";
 import Dot from "./Dot.js";
 import Equal from "./Equal.js";
+import Expr from "./Expr.js";
+import First from "./First.js";
+import FullGraphics from "./FullGraphics.js";
+import Graphics from "./Graphics.js";
 import Grayscale from "./Grayscale.js";
+import Head from "./Head.js";
 import HTMLTag from "./HTMLTag.js";
+import Last from "./Last.js";
 import ListQ from "./ListQ.js";
 import MapList from "./MapList.js";
 import MapThread from "./MapThread.js";
 import MapIndexed from "./MapIndexed.js";
 import MatrixQ from "./MatrixQ.js";
 import Mean from "./Mean.js";
-import NoneTrue from "./NoneTrue.js";
-import Expr from "./Expr.js";
-import Head from "./Head.js";
-import First from "./First.js";
-import Last from "./Last.js";
 import Most from "./Most.js";
+import NoneTrue from "./NoneTrue.js";
+import Option from "./Option.js";
 import Partition from "./Partition.js";
 import Plus from "./Plus.js";
 import RandomInteger from "./RandomInteger.js";
@@ -59,7 +63,6 @@ import StringRiffle from "./StringRiffle.js";
 import StringPadLeft from "./StringPadLeft.js";
 import SameQ from "./SameQ.js";
 import RGBColor from "./RGBColor.js";
-import CSSColor from "./CSSColor.js";
 import Uint64 from "./Uint64.js";
 import VectorQ from "./VectorQ.js";
 
@@ -83,6 +86,8 @@ export {
   Expr,
   Eval,
   First,
+  FullGraphics,
+  Graphics,
   Grayscale,
   Head,
   HTMLTag,
@@ -104,6 +109,7 @@ export {
   Mean,
   Most,
   NoneTrue,
+  Option,
   Partition,
   Pattern,
   Plus,

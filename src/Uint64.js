@@ -6,7 +6,7 @@ import BitAnd from "./BitAnd.js";
 import BitOr from "./BitOr.js";
 import Times from "./Times.js";
 import ToString from "./ToString.js";
-import { MatchAnd, MatchHead, MatchType } from "./pattern.js";
+import { MatchHead, MatchType } from "./pattern.js";
 
 import Table from "./Table.js";
 
@@ -14,7 +14,7 @@ export default function Uint64(...args) {
   return Call(Uint64, ...Eval(args));
 }
 
-const matchPair64 = MatchAnd(MatchHead(Uint64), MatchHead(Uint64));
+const matchPair64 = [MatchHead(Uint64), MatchHead(Uint64)];
 
 const words = Table((x) => BigInt(x), [64]);
 
@@ -49,7 +49,7 @@ Define(BitOr, matchPair64, function (a, b) {
   return new Expr(Uint64, BigInt.asUintN(64, a[0] | b[0]));
 });
 /*
-Define(ShiftRight, MatchAnd(MatchHead(Uint64),MatchType(1)), function (a, b) {
+Define(ShiftRight, [MatchHead(Uint64),MatchType(1)], function (a, b) {
   return new Expr(BitWord64, BitInt.UintN(64, (a[0] >> words[b]))
 });
 */

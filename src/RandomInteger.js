@@ -5,6 +5,8 @@ export default function RandomInteger(...args) {
   return Call(RandomInteger, ...Eval(args));
 }
 
-Define(RandomInteger, MatchNone, () => Math.round(Math.random()));
+Define(RandomInteger, [], () => Math.round(Math.random()));
 
-Define(RandomInteger, MatchHead(Number), (n) => Math.floor(Math.random() * n));
+Define(RandomInteger, [MatchHead(Number)], (n) =>
+  Math.floor(Math.random() * n),
+);
