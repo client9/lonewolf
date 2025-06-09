@@ -25,6 +25,7 @@ import BitOr from "./BitOr.js";
 import CSSColor from "./CSSColor.js";
 import Circle from "./Circle.js";
 import Dimensions from "./Dimensions.js";
+import Disk from "./Disk.js";
 import Do from "./Do.js";
 import Dot from "./Dot.js";
 import Equal from "./Equal.js";
@@ -36,6 +37,7 @@ import Grayscale from "./Grayscale.js";
 import Head from "./Head.js";
 import HTMLTag from "./HTMLTag.js";
 import Last from "./Last.js";
+import Line from "./Line.js";
 import ListQ from "./ListQ.js";
 import MapList from "./MapList.js";
 import MapThread from "./MapThread.js";
@@ -47,8 +49,11 @@ import NoneTrue from "./NoneTrue.js";
 import Option from "./Option.js";
 import Partition from "./Partition.js";
 import Plus from "./Plus.js";
+import Point from "./Point.js";
+import Polygon from "./Polygon.js";
 import RandomInteger from "./RandomInteger.js";
 import Range from "./Range.js";
+import Rectangle from "./Rectangle.js";
 import Rest from "./Rest.js";
 import Reverse from "./Reverse.js";
 import Table from "./Table.js";
@@ -92,6 +97,7 @@ export {
   Head,
   HTMLTag,
   Last,
+  Line,
   ListQ,
   MapIndexed,
   MapList,
@@ -113,8 +119,11 @@ export {
   Partition,
   Pattern,
   Plus,
+  Point,
+  Polygon,
   RandomInteger,
   Range,
+  Rectangle,
   Repeated,
   Reverse,
   RGBColor,
