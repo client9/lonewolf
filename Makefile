@@ -1,6 +1,8 @@
 
 lonewolf.js: src/*.js
+	npx prettier src/*.js tests/*.js --write
 	rollup src/index.js --file lonewolf.js --format es
+	node lonewolf.js
 
 start: lonewolf.js
 	python3 -m http.server
